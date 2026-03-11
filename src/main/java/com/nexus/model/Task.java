@@ -10,8 +10,8 @@ public class Task {
 
     private static int nextId = 1;
 
-    private int id;
-    private LocalDate deadline; // Imutável após o nascimento
+    private final int id; //a keyword FINAL faz o ID gerado no momento da criação nunca poder ser alterado
+    private final LocalDate deadline; // Imutável após o nascimento
     private String title;
     private TaskStatus status;
     private User owner;
@@ -33,6 +33,13 @@ public class Task {
     public void moveToInProgress(User user) {
         // TODO: Implementar lógica de proteção e atualizar activeWorkload
         // Se falhar, incrementar totalValidationErrors e lançar NexusValidationException
+
+        if(user.getOwner()==null){
+            throw new NexusValidationException("Operação só é permitida se houver um User atribuído como owner");
+        }   
+
+        user.status = IN_PROGRESS;
+    
     }
 
     /**
@@ -57,4 +64,7 @@ public class Task {
     public String getTitle() { return title; }
     public LocalDate getDeadline() { return deadline; }
     public User getOwner() { return owner; }
+
+    //setters
+
 }
