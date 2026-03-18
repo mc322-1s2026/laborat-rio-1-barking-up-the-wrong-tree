@@ -2,6 +2,8 @@ package com.nexus.model;
 
 import java.time.LocalDate;
 
+import com.nexus.service.Workspace;
+
 public class Task {
     // Métricas Globais (Alunos implementam a lógica de incremento/decremento)
     public static int totalTasksCreated = 0;
@@ -24,21 +26,22 @@ public class Task {
         
         // Ação do Aluno:
         totalTasksCreated++; 
+        
     }
 
     /**
      * Move a tarefa para IN_PROGRESS.
      * Regra: Só é possível se houver um owner atribuído e não estiver BLOCKED.
      */
-    public void moveToInProgress(User user) {
+    public void moveToInProgress(User user, Task tarefa) {
         // TODO: Implementar lógica de proteção e atualizar activeWorkload
         // Se falhar, incrementar totalValidationErrors e lançar NexusValidationException
 
-        if(user.getOwner()==null){
-            throw new NexusValidationException("Operação só é permitida se houver um User atribuído como owner");
+        if(user.consultUsername()==null){
+            throw new IllegalArgumentException("Operação só é permitida se houver um User atribuído como owner");
         }   
 
-        user.status = IN_PROGRESS;
+        tarefa.status = TaskStatus.IN_PROGRESS;
     
     }
 
