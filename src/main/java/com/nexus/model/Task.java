@@ -15,12 +15,14 @@ public class Task {
     private String title;
     private TaskStatus status;
     private User owner;
+    private Integer estimatedEffort; //Tem que ser em horas;
 
-    public Task(String title, LocalDate deadline) {
+    public Task(String title, LocalDate deadline, Integer esforco) {
         this.id = nextId++;
         this.deadline = deadline;
         this.title = title;
         this.status = TaskStatus.TO_DO;
+        this.estimatedEffort = esforco;
         
         // Ação do Aluno:
         totalTasksCreated++; 
@@ -41,6 +43,7 @@ public class Task {
 
         tarefa.status = TaskStatus.IN_PROGRESS;
         tarefa.owner = user;
+        
         return;
     }
 

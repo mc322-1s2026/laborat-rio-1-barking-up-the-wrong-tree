@@ -105,10 +105,18 @@ public class Main {
         try {
             System.out.print("Título da Tarefa: ");
             String title = scanner.nextLine();
+
             System.out.print("Prazo (AAAA-MM-DD): ");
             LocalDate deadline = LocalDate.parse(scanner.nextLine());
+            
+            System.out.print("Esforco esperado em horas: ");
+            Integer esforco = Integer.parseInt(scanner.nextLine());
+            while(esforco<1){
+                System.out.print("Esforco invalido, tente de novo: ");
+                esforco = Integer.parseInt(scanner.nextLine());
+            }
 
-            Task newTask = new Task(title, deadline);
+            Task newTask = new Task(title, deadline, esforco);
             workspace.addTask(newTask);
             System.out.println("[OK] Tarefa adicionada ao backlog.");
         } catch (DateTimeParseException e) {
