@@ -15,31 +15,36 @@ public class Task {
     private String title;
     private TaskStatus status;
     private User owner;
+    private Integer estimatedEffort; //Tem que ser em horas;
 
-    public Task(String title, LocalDate deadline) {
+    public Task(String title, LocalDate deadline, Integer esforco) {
         this.id = nextId++;
         this.deadline = deadline;
         this.title = title;
         this.status = TaskStatus.TO_DO;
+        this.estimatedEffort = esforco;
         
         // Ação do Aluno:
         totalTasksCreated++; 
+        
     }
 
     /**
      * Move a tarefa para IN_PROGRESS.
      * Regra: Só é possível se houver um owner atribuído e não estiver BLOCKED.
      */
-    public void moveToInProgress(User user) {
+    public void moveToInProgress(User user, Task tarefa) {
         // TODO: Implementar lógica de proteção e atualizar activeWorkload
         // Se falhar, incrementar totalValidationErrors e lançar NexusValidationException
 
-        if(user.getOwner()==null){
-            throw new NexusValidationException("Operação só é permitida se houver um User atribuído como owner");
+        if(user.consultUsername()==null){
+            throw new IllegalArgumentException("Operação só é permitida se houver um User atribuído como owner");
         }   
 
-        user.status = IN_PROGRESS;
-    
+        tarefa.status = TaskStatus.IN_PROGRESS;
+        tarefa.owner = user;
+        
+        return;
     }
 
     /**
