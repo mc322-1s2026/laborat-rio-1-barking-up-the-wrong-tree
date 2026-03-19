@@ -2,8 +2,6 @@ package com.nexus.model;
 
 import java.time.LocalDate;
 
-import com.nexus.service.Workspace;
-
 public class Task {
     // Métricas Globais (Alunos implementam a lógica de incremento/decremento)
     public static int totalTasksCreated = 0;
@@ -42,7 +40,8 @@ public class Task {
         }   
 
         tarefa.status = TaskStatus.IN_PROGRESS;
-    
+        tarefa.owner = user;
+        return;
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.nexus.model;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.nexus.service.Workspace;
 
@@ -22,19 +21,15 @@ public class User {
         this.email = email;
     }
 
-    public String consultEmail() {
-        return email;
-    }
+    public String consultEmail() {return email;}
 
-    public String consultUsername() {
-        return username;
-    }
+    public String consultUsername() {return username;}
 
     public static void calculateWorkload(Workspace workspace, User usuario) {
         Integer workload_verificar = 0;
         List<Task> tasks = workspace.getTasks();
         for (Task t : tasks){
-            if (usuario.username.equals(t.getOwner())){
+            if (usuario == t.getOwner()){
                 if(t.getStatus().equals(TaskStatus.IN_PROGRESS)){
                     workload_verificar += 1;
                 }
@@ -51,11 +46,10 @@ public class User {
             return false;
         }
 
-        // String emailRegEx = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        // Pattern emailChecker = Pattern.compile(emailRegex);
+        String emailRegEx = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern emailChecker = Pattern.compile(emailRegEx);
 
-        // return emailChecker.matcher(email).matches();
-        return true;
+        return emailChecker.matcher(email).matches();
     }
 
 
