@@ -20,9 +20,6 @@ public class Project {
 
 
     public void addTask(Task t){
-        if(Tarefas.isEmpty()){
-            currentWorkload = 0; //ja nao tem tarefas, logo obrigatoriamente nao tem workload
-        }
         Tarefas.add(t);
         if (currentWorkload + t.getEffort() > maxWorkload){
             //TODO: metodo de erro lancado por ultrapassar limite de workload
