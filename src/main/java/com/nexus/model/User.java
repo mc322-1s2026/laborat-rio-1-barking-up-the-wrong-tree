@@ -30,9 +30,18 @@ public class User {
         return username;
     }
 
-    public static void calculateWorkload(Workspace workspace) {
+    public static void calculateWorkload(Workspace workspace, User usuario) {
+        Integer workload_verificar = 0;
         List<Task> tasks = workspace.getTasks();
-        // TODO: Implementar forma de ler lista criada e contar quantas repeticoes de tarefas sao atribuidas ao usuario
+        for (Task t : tasks){
+            if (usuario.username.equals(t.getOwner())){
+                if(t.getStatus().equals(TaskStatus.IN_PROGRESS)){
+                    workload_verificar += 1;
+                }
+            }
+        
+            System.out.println("O usuario " + usuario.username + "tem um workload de: " + workload_verificar);
+        }
         return; 
     }
 
