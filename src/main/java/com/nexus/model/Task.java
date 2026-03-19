@@ -69,6 +69,7 @@ public class Task {
     public String getTitle() { return title; }
     public LocalDate getDeadline() { return deadline; }
     public User getOwner() { return owner; }
+    public Integer getEffort() {return estimatedEffort;}
 
     //setters
 
