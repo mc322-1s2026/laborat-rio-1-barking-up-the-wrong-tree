@@ -1,5 +1,6 @@
 package com.nexus;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -53,7 +54,6 @@ public class Main {
                     String file = (logChoice.equals("1")) ? "log_v1.txt" : "log_v2.txt";
                     logProcessor.processLog(file, workspace, users);
                 }
-                case "5" -> debug();
                 default -> System.out.println("\n[!] Opção inválida.");
             }
         }
@@ -73,7 +73,6 @@ public class Main {
             2. Adicionar Tarefa
             3. Listar Todas as Tarefas
             4. Processar Log de Ações
-            5. debug
             0. Sair
             Escolha uma opção:\s""");
     }
@@ -89,6 +88,7 @@ public class Main {
             String username = scanner.nextLine();
             System.out.print("Email: ");
             String email = scanner.nextLine();
+
             User newUser = new User(username, email);
             users.add(newUser);
             System.out.println("[OK] Usuário cadastrado.");
@@ -104,28 +104,27 @@ public class Main {
      */
     private static void addTask() {
         try {
-            
+
             System.out.print("Título da Tarefa: ");
             String title = scanner.nextLine();
-            
+
             System.out.print("Prazo (AAAA-MM-DD): ");
             LocalDate deadline = LocalDate.parse(scanner.nextLine());
-            
             
             System.out.print("Esforco esperado em horas: ");
             Integer esforco = Integer.parseInt(scanner.nextLine());
 
             Task newTask = new Task(title, deadline, esforco);
+
             workspace.addTask(newTask);
             System.out.println("[OK] Tarefa adicionada ao backlog.");
+
         } catch (DateTimeParseException e) {
             System.err.println("[ERRO] Formato de data inválido. Use AAAA-MM-DD.");
-            NexusValidationException.addErrors(); /** Mais facil usar essa funcao nova do que tornar o DateTimeParseException 
-                                                        em um NexusValidationException (nao sei como)                                        
-                                                    */
-
         } catch (NexusValidationException e){
-            System.err.println("[ERRO] " + e.getMessage());
+            System.err.println("[ERRO}" + e.getMessage());
+        } catch (NumberFormatException e){
+            System.err.println("[ERRO] Esforco tem que ser um numero Natural");
         }
     }
 
@@ -168,15 +167,5 @@ public class Main {
     private static String truncar(String str, int tam) {
         if (str == null) return "";
         return str.length() > tam ? str.substring(0, tam - 3) + "..." : str;
-    }
-
-
-    /* funcao debug e uma mini funcao que pode
-        customizar para o que quiser para fazer 
-        validacoes rapidas
-     */
-
-    private static void debug(){
-        System.err.println(NexusValidationException.nofErrors);
     }
 }
