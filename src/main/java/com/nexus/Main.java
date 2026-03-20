@@ -77,7 +77,8 @@ public class Main {
             5. Debug
             0. Sair
             Escolha uma opção:\s""");
-    }
+    }   
+    //TODO: Remover funcao debug eventualmente
 
     /**
      * Solicita ao usuário nome de usuário e email, cria um novo {@link User} e
