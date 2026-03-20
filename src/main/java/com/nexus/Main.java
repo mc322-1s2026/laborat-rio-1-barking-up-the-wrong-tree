@@ -125,7 +125,7 @@ public class Main {
             System.err.println("[ERRO] Formato de data inválido. Use AAAA-MM-DD.");
             NexusValidationException.addErrors();
         } catch (NexusValidationException e){
-            System.err.println("[ERRO}" + e.getMessage());
+            System.err.println("[ERRO] " + e.getMessage());
         } catch (NumberFormatException e){
             System.err.println("[ERRO] Esforco tem que ser um numero Natural");
             NexusValidationException.addErrors();
