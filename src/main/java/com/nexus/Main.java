@@ -52,7 +52,7 @@ public class Main {
                     String file = (logChoice.equals("1")) ? "log_v1.txt" : "log_v2.txt";
                     logProcessor.processLog(file, workspace, users);
                 }
-                case "5" -> debug();
+                case "5" -> debug(); //TODO:Nao esquecer de remover o debug na versao final
                 default -> System.out.println("\n[!] Opção inválida.");
             }
         }
