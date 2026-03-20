@@ -34,16 +34,17 @@ public class Task {
      * Move a tarefa para IN_PROGRESS.
      * Regra: Só é possível se houver um owner atribuído e não estiver BLOCKED.
      */
-    public void moveToInProgress(User user, Task tarefa) {
+    public void moveToInProgress(User user) {
         // TODO: Implementar lógica de proteção e atualizar activeWorkload
         // Se falhar, incrementar totalValidationErrors e lançar NexusValidationException
 
         if(user.consultUsername()==null){
+            incrementTotalValidationErrors();
             throw new NexusValidationException("Operação só é permitida se houver um User atribuído como owner");
-        }   
+        }
 
-        tarefa.status = TaskStatus.IN_PROGRESS;
-        tarefa.owner = user;
+
+        setStatus(TaskStatus.IN_PROGRESS);
         
         return;
     }
@@ -56,18 +57,21 @@ public class Task {
         // TODO: Implementar lógica de proteção e atualizar activeWorkload (decrementar)
         TaskStatus status = getStatus();
         if(status == TaskStatus.BLOCKED){
+            incrementTotalValidationErrors();
             throw new NexusValidationException("Só é permitido se a tarefa não estiver no status BLOCKED");
         }
-        this.status = TaskStatus.DONE;
+        
+        setStatus(TaskStatus.DONE);
     }
 
     public void setBlocked(boolean blocked) {
         TaskStatus status = getStatus();
         if(status == TaskStatus.DONE){
+            incrementTotalValidationErrors();
             throw new NexusValidationException("Uma tarefa em DONE não pode ser movida para BLOCKED");
         } 
 
-        this.status = TaskStatus.BLOCKED;
+        setStatus(TaskStatus.BLOCKED);
     }
 
     // Getters
@@ -79,5 +83,13 @@ public class Task {
     public Integer getEffort() {return estimatedEffort;}
 
     //setters
+    public void setStatus(TaskStatus newstatus){
+        this.status = newstatus;
+    }
 
+    public void incrementTotalValidationErrors(){
+        Task.totalValidationErrors++;
+    }
+
+    
 }
