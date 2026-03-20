@@ -44,8 +44,15 @@ public class Workspace {
 
     public String getProjectHealth(){
         /*Para um dado projeto, calcular o percentual de conclusão (Tarefas DONE / Total de Tarefas) */
-        String projectHealth = "%";
-        //TODO
+        
+        Integer tasksDONE = getTasks().stream()
+        .filter(task -> task.getStatus()==TaskStatus.DONE)
+        .count();
+
+        float ratio = (tasksDONE/ (getTasks().size() ));
+
+        String projectHealth = Float.toString(ratio);
+        String.format("%.2f %%", projectHealth);
 
         return projectHealth;
     }
@@ -53,8 +60,13 @@ public class Workspace {
     public TaskStatus getBottleneck(){
         /*Identificar qual o status que possui o maior número de tarefas no sistema (exceto DONE) */
         TaskStatus Bottlenecked = TaskStatus.BLOCKED;
-        //TODO
 
+        
+        int countBlocked = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.BLOCKED).count();
+        int countTODO = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.TO_DO).count();
+        int countINPROGRESS = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.IN_PROGRESS).count();
+
+        //TODO: recisa retornar o maior Status; Esperando peds responderem o que é pra fazer em caso de empate
         return Bottlenecked;
     }
 }
