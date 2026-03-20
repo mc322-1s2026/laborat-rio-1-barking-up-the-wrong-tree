@@ -91,5 +91,13 @@ public class Task {
         Task.totalValidationErrors++;
     }
 
+    public void incrementWorkload(){
+        Task.activeWorkload++;
+    }
+
+    public void incrementTotalTasksCreated(){
+        Task.totalTasksCreated++;
+    }
+
     
 }

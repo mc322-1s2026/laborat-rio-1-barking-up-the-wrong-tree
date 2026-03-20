@@ -5,12 +5,15 @@ import java.util.List;
 import com.nexus.model.Task;
 
 public class Project {
+
     public String Nome;
+    public float totalBudget;
     private List<Task> Tarefas = new ArrayList<>();
     private Integer maxWorkload;
     private Integer currentWorkload;
 
     public Project(String nome, Integer maxWorkload){
+
         this.Nome = nome;
         this.maxWorkload = maxWorkload;
         this.currentWorkload = 0;
@@ -19,17 +22,19 @@ public class Project {
     }
 
 
-    public void addTask(Task t){
-        Tarefas.add(t);
-        if (currentWorkload + t.getEffort() > maxWorkload){
-            //TODO: metodo de erro lancado por ultrapassar limite de workload
+    public void addTask(Task task){
+        if (currentWorkload + task.getEffort() > maxWorkload){
+            throw new NexusValidationException("Ultrapassou o limite de workload")
         }
         else{
-            currentWorkload += t.getEffort();
+            this.Tarefas.add(task);
+            currentWorkload += task.getEffort();
         }
         return;
     }
 
+
+    
 
 
 }
