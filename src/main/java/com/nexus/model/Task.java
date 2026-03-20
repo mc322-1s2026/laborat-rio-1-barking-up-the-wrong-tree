@@ -44,7 +44,12 @@ public class Task {
     public void moveToInProgress(User user) {
         // Se falhar, incrementar totalValidationErrors e lançar NexusValidationException
 
-        setOwner(user);
+        if(user == this.owner){
+            incrementTotalValidationErrors();
+            throw new NexusValidationException("Operação só é permitida se houver um User atribuído como owner");
+        }
+
+
         setStatus(TaskStatus.IN_PROGRESS);
         
         return;
