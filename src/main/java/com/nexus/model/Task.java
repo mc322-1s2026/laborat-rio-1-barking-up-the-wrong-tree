@@ -31,6 +31,7 @@ public class Task {
         this.title = title;
         this.status = TaskStatus.TO_DO;
         this.estimatedEffort = esforco;
+        this.owner = null; //Nao sei se e assim que tem que implementar agora
         
         // Ação do Aluno:
         totalTasksCreated++; 
@@ -41,10 +42,10 @@ public class Task {
      * Move a tarefa para IN_PROGRESS.
      * Regra: Só é possível se houver um owner atribuído e não estiver BLOCKED.
      */
-    public void moveToInProgress(User user) {
+    public void moveToInProgress(User user, Task tarefa) {
         // Se falhar, incrementar totalValidationErrors e lançar NexusValidationException
 
-        if(user == this.owner){
+        if(user != tarefa.owner){
             incrementTotalValidationErrors();
             throw new NexusValidationException("Operação só é permitida se houver um User atribuído como owner");
         }
