@@ -1,5 +1,6 @@
 package com.nexus.model;
 
+import com.nexus.exception.*;
 import java.time.LocalDate;
 
 public class Task {
@@ -38,7 +39,7 @@ public class Task {
         // Se falhar, incrementar totalValidationErrors e lançar NexusValidationException
 
         if(user.consultUsername()==null){
-            throw new IllegalArgumentException("Operação só é permitida se houver um User atribuído como owner");
+            throw new NexusValidationException("Operação só é permitida se houver um User atribuído como owner");
         }   
 
         tarefa.status = TaskStatus.IN_PROGRESS;
@@ -53,14 +54,20 @@ public class Task {
      */
     public void markAsDone() {
         // TODO: Implementar lógica de proteção e atualizar activeWorkload (decrementar)
+        TaskStatus status = getStatus();
+        if(status == TaskStatus.BLOCKED){
+            throw new NexusValidationException("Só é permitido se a tarefa não estiver no status BLOCKED");
+        }
+        this.status = TaskStatus.DONE;
     }
 
     public void setBlocked(boolean blocked) {
-        if (blocked) {
-            this.status = TaskStatus.BLOCKED;
-        } else {
-            this.status = TaskStatus.TO_DO; // Simplificação para o Lab
-        }
+        TaskStatus status = getStatus();
+        if(status == TaskStatus.DONE){
+            throw new NexusValidationException("Uma tarefa em DONE não pode ser movida para BLOCKED");
+        } 
+
+        this.status = TaskStatus.BLOCKED;
     }
 
     // Getters
