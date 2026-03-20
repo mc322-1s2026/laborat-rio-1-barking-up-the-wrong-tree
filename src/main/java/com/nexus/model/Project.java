@@ -7,8 +7,8 @@ import com.nexus.exception.*;
 
 public class Project {
 
-    public String Nome;
-    public float totalBudget;
+    private String Nome;
+    private float totalBudget;
     private List<Task> Tarefas = new ArrayList<>();
     private Integer maxWorkload;
     private Integer currentWorkload;
