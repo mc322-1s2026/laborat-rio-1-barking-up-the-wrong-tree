@@ -19,6 +19,13 @@ public class Task {
     private Integer estimatedEffort; //Tem que ser em horas;
 
     public Task(String title, LocalDate deadline, Integer esforco) {
+
+        if(title == null || title.isEmpty() ){
+            throw new NexusValidationException("Nome da tarefa nao pode ser vazia");
+        }
+        if(esforco == null || esforco < 1){
+            throw new NexusValidationException("Esforoco tem que ser um numero natural");
+        }
         this.id = nextId++;
         this.deadline = deadline;
         this.title = title;

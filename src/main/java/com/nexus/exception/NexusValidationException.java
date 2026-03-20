@@ -8,6 +8,9 @@ public class NexusValidationException extends RuntimeException {
         super(message);
         nofErrors++;
     }
-
+    public static void addErrors(){
+        nofErrors++;
+    }
+    
     
 }
