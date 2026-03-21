@@ -19,11 +19,19 @@ public class Task {
     private Integer estimatedEffort; //Tem que ser em horas;
 
     public Task(String title, LocalDate deadline, Integer esforco) {
+
+        if(title == null || title.isEmpty() ){
+            throw new NexusValidationException("Nome da tarefa nao pode ser vazia");
+        }
+        if(esforco == null || esforco < 1){
+            throw new NexusValidationException("Esforoco tem que ser um numero natural");
+        }
         this.id = nextId++;
         this.deadline = deadline;
         this.title = title;
         this.status = TaskStatus.TO_DO;
         this.estimatedEffort = esforco;
+        this.owner = null; //Nao sei se e assim que tem que implementar agora
         
         // Ação do Aluno:
         totalTasksCreated++; 
@@ -34,10 +42,10 @@ public class Task {
      * Move a tarefa para IN_PROGRESS.
      * Regra: Só é possível se houver um owner atribuído e não estiver BLOCKED.
      */
-    public void moveToInProgress(User user) {
+    public void moveToInProgress(User user, Task tarefa) {
         // Se falhar, incrementar totalValidationErrors e lançar NexusValidationException
 
-        if(user.consultUsername()==null){
+        if(user != tarefa.owner){
             incrementTotalValidationErrors();
             throw new NexusValidationException("Operação só é permitida se houver um User atribuído como owner");
         }
@@ -97,5 +105,8 @@ public class Task {
         Task.totalTasksCreated++;
     }
 
-    
+    public void setOwner(User nome){
+        this.owner = nome;
+        return;
+    }
 }

@@ -1,6 +1,8 @@
 package com.nexus.model;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import com.nexus.exception.NexusValidationException;
 import com.nexus.service.Workspace;
 
 public class User {
@@ -9,11 +11,11 @@ public class User {
 
     public User(String username, String email) {
         if (username == null || username.isBlank()) {
-            throw new IllegalArgumentException("Username não pode ser vazio.");
+            throw new NexusValidationException("Username não pode ser vazio.");
         }
 
         if(!isEmailValid(email)){
-            throw new IllegalArgumentException("email inválido.");
+            throw new NexusValidationException("email inválido.");
         }
 
     

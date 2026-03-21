@@ -7,18 +7,23 @@ import com.nexus.exception.*;
 
 public class Project {
 
-    public String Nome;
-    public float totalBudget;
+    private String Nome;
+    private float totalBudget;
     private List<Task> Tarefas = new ArrayList<>();
     private Integer maxWorkload;
     private Integer currentWorkload;
 
     public Project(String nome, Integer maxWorkload){
 
+        if( nome.isEmpty() || nome == null){
+            throw new NexusValidationException("Nome do projeto nao pode ser vazio");
+        }
+        if( maxWorkload < 0){
+            throw new NexusValidationException("A cagra horaria maxima tem que ser um numero natural");
+        }
         this.Nome = nome;
         this.maxWorkload = maxWorkload;
         this.currentWorkload = 0;
-        //TODO: Implementar verificacoes e validacoes na criacao de projeto!
     }
 
 
