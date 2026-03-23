@@ -172,6 +172,9 @@ public class Main {
         return str.length() > tam ? str.substring(0, tam - 3) + "..." : str;
     }
 
+    public static List<User> getUsers(){
+        return new ArrayList<>(users);
+    }
     private static void debug(){
         System.err.println(NexusValidationException.nofErrors);
 

@@ -2,6 +2,7 @@ package com.nexus.model;
 
 import com.nexus.exception.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Task {
     // Métricas Globais (Alunos implementam a lógica de incremento/decremento)
@@ -11,6 +12,7 @@ public class Task {
 
     private static int nextId = 1;
 
+    private static ArrayList<Task> allTasks = new ArrayList<>();
     private final int id; //a keyword FINAL faz o ID gerado no momento da criação nunca poder ser alterado
     private final LocalDate deadline; // Imutável após o nascimento
     private String title;
@@ -35,7 +37,7 @@ public class Task {
         
         // Ação do Aluno:
         totalTasksCreated++; 
-        
+        allTasks.add(this);
     }
 
     /**
@@ -53,7 +55,6 @@ public class Task {
 
         setStatus(TaskStatus.IN_PROGRESS);
         
-        return;
     }
 
     /**
@@ -87,6 +88,10 @@ public class Task {
     public LocalDate getDeadline() { return deadline; }
     public User getOwner() { return owner; }
     public Integer getEffort() {return estimatedEffort;}
+
+    public static ArrayList<Task> getAllTasks(){
+        return allTasks;
+    }
 
     //setters
     public void setStatus(TaskStatus newstatus){

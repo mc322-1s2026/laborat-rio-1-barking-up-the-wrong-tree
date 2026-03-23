@@ -1,6 +1,7 @@
 package com.nexus.service;
 
 import com.nexus.model.*;
+import com.nexus.service.*;
 import com.nexus.exception.NexusValidationException;
 import java.io.IOException;
 // import java.time.LocalDate;
@@ -39,6 +40,39 @@ public class LogProcessor {
                             //     workspace.addTask(t);
                             //     System.out.println("[LOG] Tarefa criada: " + p[1]);
                             // }
+                            case "CREATE_TASK" -> {
+                                String taskName = p[1];
+                                String deadline = p[2];                                
+                                String effort = p[3];
+                                String projectName = p[4]; 
+                                
+                                LocalDate deadlineDate = LocalDate.parse(deadline);
+
+                                
+                                System.out.println("Mexer dps");
+                            }
+                            case "ASSIGN_USER" -> {
+                                String taskId = p[1];
+                                String username = p[2];
+
+                                System.out.println("Mexer dps");
+                            }
+                            case "CHANGE_STATUS" -> {
+                                String taskId = p[1];
+                                String newStatus = p[2];
+
+                                System.out.println("Mexer dps");
+
+                            }
+                            case "REPORT_STATUS" -> {
+                                System.out.println("Mexer dps");
+                                
+                                workspace.getTopPerformers();
+                                workspace.getOverloaded();
+                                workspace.getProjectHealth();
+                                workspace.getBottleneck();
+                            }
+
                             default -> System.err.println("[WARN] Ação desconhecida: " + action);
                         }
                     } catch (NexusValidationException e) {

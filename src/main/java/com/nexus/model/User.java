@@ -1,11 +1,16 @@
 package com.nexus.model;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 
 import com.nexus.exception.NexusValidationException;
 import com.nexus.service.Workspace;
+import java.util.ArrayList;
+
 
 public class User {
+
     private final String username;
     private final String email;
 
@@ -27,19 +32,15 @@ public class User {
 
     public String consultUsername() {return username;}
 
-    public static void calculateWorkload(Workspace workspace, User usuario) {
-        Integer workload_verificar = 0;
-        List<Task> tasks = workspace.getTasks();
-        for (Task t : tasks){
-            if (usuario == t.getOwner()){
-                if(t.getStatus().equals(TaskStatus.IN_PROGRESS)){
-                    workload_verificar += 1;
-                }
-            }
-        
-            System.out.println("O usuario " + usuario.username + "tem um workload de: " + workload_verificar);
-        }
-        return; 
+
+    public long calculateWorkload(){
+        ArrayList<Task> allTasks = Task.getAllTasks();
+
+        long workload = allTasks.stream()
+        .filter(obj -> obj.getOwner() == this && obj.getStatus().equals(TaskStatus.IN_PROGRESS))
+        .count();
+
+        return workload;
     }
 
     private boolean isEmailValid(String email){
@@ -54,5 +55,26 @@ public class User {
         return emailChecker.matcher(email).matches();
     }
 
+    public long countDoneTasks(){
+        List<Task> userTasks = getUserTasks();
+
+        long nofDoneTasks = userTasks.stream()
+        .filter(obj -> obj.getStatus().equals(TaskStatus.DONE))
+        .count();
+
+        return nofDoneTasks;
+    }
+
+    public List<Task> getUserTasks(){
+        ArrayList<Task> allTasks = Task.getAllTasks();
+
+        List<Task> tasks = allTasks.stream()
+        .filter(obj -> obj.getOwner() == this)
+        .collect(Collectors.toList());
+
+        return tasks;
+    }
+
+   
 
 }

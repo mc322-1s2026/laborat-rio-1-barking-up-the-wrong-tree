@@ -1,13 +1,16 @@
 package com.nexus.service;
 
+import com.nexus.Main;
 import com.nexus.model.Task;
 import com.nexus.model.TaskStatus;
 import com.nexus.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Collections;
 import java.util.stream.Collectors;
+import java.util.HashMap;
 
 
 public class Workspace {
@@ -26,26 +29,33 @@ public class Workspace {
 
     public List<User> getTopPerformers(){
         /*Um método que retorna os 3 usuários que possuem o maior número de tarefas no status DONE */
-        List<User> topPerformers = null; //= getTasks().stream();
-        //TODO
+        List<User> allUsers = Main.getUsers(); 
+        
+        List<User> topThree = allUsers.stream()
+        .sorted((a, b) -> Long.compare(b.countDoneTasks(), a.countDoneTasks()))
+        .limit(3)
+        .collect(Collectors.toList());
 
-        return topPerformers; 
+        return topThree; //o desempate fica a critério dos próprios mecanismos do stream
 
     }
 
     public List<User> getOverloaded(){
         /*Listar todos os usuários cuja carga de trabalho atual (IN_PROGRESS) ultrapassa 10 tarefas. */
-        List<User> Overloaded = null; //getTasks().stream();
-        //TODO
+        List<User> allUsers = Main.getUsers(); 
+        
+        List<User> overloaded = allUsers.stream()
+        .filter(usr -> usr.calculateWorkload() > 10)
+        .collect(Collectors.toList());
 
-        return Overloaded;
+        return overloaded;
 
     }
 
     public String getProjectHealth(){
         /*Para um dado projeto, calcular o percentual de conclusão (Tarefas DONE / Total de Tarefas) */
         
-        Integer tasksDONE = getTasks().stream()
+        long tasksDONE = getTasks().stream()
         .filter(task -> task.getStatus()==TaskStatus.DONE)
         .count();
 
@@ -59,14 +69,21 @@ public class Workspace {
 
     public TaskStatus getBottleneck(){
         /*Identificar qual o status que possui o maior número de tarefas no sistema (exceto DONE) */
-        TaskStatus Bottlenecked = TaskStatus.BLOCKED;
 
+        long countBlocked = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.BLOCKED).count();
+        long countTODO = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.TO_DO).count();
+        long countINPROGRESS = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.IN_PROGRESS).count();
+
+        HashMap<Long, TaskStatus> statusmap = new HashMap();
+
+        statusmap.put(countBlocked, TaskStatus.BLOCKED);
+        statusmap.put(countTODO, TaskStatus.TO_DO);
+        statusmap.put(countINPROGRESS, TaskStatus.IN_PROGRESS);
+
+        Long maxTask =  Collections.max(statusmap.keySet()); //o desempate será feito a critério dos mecanismos do próprio HashMap
+
+        return statusmap.get(maxTask);
         
-        int countBlocked = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.BLOCKED).count();
-        int countTODO = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.TO_DO).count();
-        int countINPROGRESS = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.IN_PROGRESS).count();
-
-        //TODO: recisa retornar o maior Status; Esperando peds responderem o que é pra fazer em caso de empate
-        return Bottlenecked;
     }
+
 }
