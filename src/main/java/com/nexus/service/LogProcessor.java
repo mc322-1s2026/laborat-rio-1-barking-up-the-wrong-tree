@@ -4,7 +4,7 @@ import com.nexus.model.*;
 import com.nexus.service.*;
 import com.nexus.exception.NexusValidationException;
 import java.io.IOException;
-import java.time.LocalDate;
+// import java.time.LocalDate;
 import java.util.List;
 
 public class LogProcessor {
@@ -34,7 +34,7 @@ public class LogProcessor {
                                 users.add(new User(p[1], p[2]));
                                 System.out.println("[LOG] Usuário criado: " + p[1]);
                             }
-                            //TODO: resolver esses problemas causados pela implementacao de novas features
+                            
                             // case "CREATE_TASK" -> {
                             //     Task t = new Task(p[1], LocalDate.parse(p[2]));
                             //     workspace.addTask(t);

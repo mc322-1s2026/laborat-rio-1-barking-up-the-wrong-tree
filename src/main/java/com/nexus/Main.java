@@ -1,5 +1,4 @@
 package com.nexus;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -53,6 +52,7 @@ public class Main {
                     String file = (logChoice.equals("1")) ? "log_v1.txt" : "log_v2.txt";
                     logProcessor.processLog(file, workspace, users);
                 }
+                case "5" -> debug(); //TODO:Nao esquecer de remover o debug na versao final
                 default -> System.out.println("\n[!] Opção inválida.");
             }
         }
@@ -72,9 +72,11 @@ public class Main {
             2. Adicionar Tarefa
             3. Listar Todas as Tarefas
             4. Processar Log de Ações
+            5. Debug
             0. Sair
             Escolha uma opção:\s""");
-    }
+    }   
+    //TODO: Remover funcao debug eventualmente
 
     /**
      * Solicita ao usuário nome de usuário e email, cria um novo {@link User} e
@@ -103,6 +105,7 @@ public class Main {
      */
     private static void addTask() {
         try {
+
             System.out.print("Título da Tarefa: ");
             String title = scanner.nextLine();
 
@@ -111,16 +114,20 @@ public class Main {
             
             System.out.print("Esforco esperado em horas: ");
             Integer esforco = Integer.parseInt(scanner.nextLine());
-            while(esforco<1){
-                System.out.print("Esforco invalido, tente de novo: ");
-                esforco = Integer.parseInt(scanner.nextLine());
-            }
 
             Task newTask = new Task(title, deadline, esforco);
+
             workspace.addTask(newTask);
             System.out.println("[OK] Tarefa adicionada ao backlog.");
+
         } catch (DateTimeParseException e) {
             System.err.println("[ERRO] Formato de data inválido. Use AAAA-MM-DD.");
+            NexusValidationException.addErrors();
+        } catch (NexusValidationException e){
+            System.err.println("[ERRO] " + e.getMessage());
+        } catch (NumberFormatException e){
+            System.err.println("[ERRO] Esforco tem que ser um numero Natural");
+            NexusValidationException.addErrors();
         }
     }
 
@@ -167,5 +174,10 @@ public class Main {
 
     public static List<User> getUsers(){
         return new ArrayList<>(users);
+    }
+    private static void debug(){
+        System.err.println(NexusValidationException.nofErrors);
+
+
     }
 }
