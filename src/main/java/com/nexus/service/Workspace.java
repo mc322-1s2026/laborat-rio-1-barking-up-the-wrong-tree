@@ -31,9 +31,12 @@ public class Workspace {
         /*Um método que retorna os 3 usuários que possuem o maior número de tarefas no status DONE */
         List<User> allUsers = Main.getUsers(); 
         
+        List<User> topThree = allUsers.stream()
+        .sorted((a, b) -> Long.compare(b.countDoneTasks(), a.countDoneTasks()))
+        .limit(3)
+        .collect(Collectors.toList());
 
-
-        return topPerformers; 
+        return topThree; //o desempate fica a critério dos próprios mecanismos do stream
 
     }
 
@@ -77,9 +80,10 @@ public class Workspace {
         statusmap.put(countTODO, TaskStatus.TO_DO);
         statusmap.put(countINPROGRESS, TaskStatus.IN_PROGRESS);
 
-        Long maxTask =  Collections.max(statusmap.keySet());
+        Long maxTask =  Collections.max(statusmap.keySet()); //o desempate será feito a critério dos mecanismos do próprio HashMap
 
         return statusmap.get(maxTask);
         
     }
+
 }

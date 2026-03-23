@@ -1,6 +1,8 @@
 package com.nexus.model;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import com.nexus.service.Workspace;
 import java.util.ArrayList;
 
@@ -22,7 +24,6 @@ public class User {
     
         this.username = username;
         this.email = email;
-        allUsers.add(this);
     }
 
     public String consultEmail() {return email;}
@@ -50,6 +51,26 @@ public class User {
         Pattern emailChecker = Pattern.compile(emailRegEx);
 
         return emailChecker.matcher(email).matches();
+    }
+
+    public long countDoneTasks(){
+        List<Task> userTasks = getUserTasks();
+
+        long nofDoneTasks = userTasks.stream()
+        .filter(obj -> obj.getStatus().equals(TaskStatus.DONE))
+        .count();
+
+        return nofDoneTasks;
+    }
+
+    public List<Task> getUserTasks(){
+        ArrayList<Task> allTasks = Task.getAllTasks();
+
+        List<Task> tasks = allTasks.stream()
+        .filter(obj -> obj.getOwner() == this)
+        .collect(Collectors.toList());
+
+        return tasks;
     }
 
    
