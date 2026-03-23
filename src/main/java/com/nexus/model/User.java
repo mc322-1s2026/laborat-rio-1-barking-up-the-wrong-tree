@@ -30,19 +30,15 @@ public class User {
 
     public String consultUsername() {return username;}
 
-    public static void calculateWorkload(Workspace workspace, User usuario) {
-        Integer workload_verificar = 0;
-        List<Task> tasks = workspace.getTasks();
-        for (Task t : tasks){
-            if (usuario == t.getOwner()){
-                if(t.getStatus().equals(TaskStatus.IN_PROGRESS)){
-                    workload_verificar += 1;
-                }
-            }
-        
-            System.out.println("O usuario " + usuario.username + "tem um workload de: " + workload_verificar);
-        }
-        return; 
+
+    public long calculateWorkload(){
+        ArrayList<Task> allTasks = Task.getAllTasks();
+
+        long workload = allTasks.stream()
+        .filter(obj -> obj.getOwner() == this && obj.getStatus().equals(TaskStatus.IN_PROGRESS))
+        .count();
+
+        return workload;
     }
 
     private boolean isEmailValid(String email){

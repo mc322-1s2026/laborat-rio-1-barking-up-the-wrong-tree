@@ -37,10 +37,13 @@ public class Workspace {
 
     public List<User> getOverloaded(){
         /*Listar todos os usuários cuja carga de trabalho atual (IN_PROGRESS) ultrapassa 10 tarefas. */
-        List<User> allUsers = ; //getTasks().stream();
-        //TODO
+        List<User> allUsers = User.getAllUsers(); //getTasks().stream();
+        
+        List<User> overloaded = allUsers.stream()
+        .filter(usr -> usr.calculateWorkload() > 10)
+        .collect(Collectors.toList());
 
-        return Overloaded;
+        return overloaded;
 
     }
 
