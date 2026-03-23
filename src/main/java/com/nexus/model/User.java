@@ -2,8 +2,12 @@ package com.nexus.model;
 import java.util.List;
 import java.util.regex.Pattern;
 import com.nexus.service.Workspace;
+import java.util.ArrayList;
+
 
 public class User {
+
+    private static ArrayList<User> allUsers = new ArrayList<>();
     private final String username;
     private final String email;
 
@@ -19,6 +23,7 @@ public class User {
     
         this.username = username;
         this.email = email;
+        allUsers.add(this);
     }
 
     public String consultEmail() {return email;}
@@ -50,6 +55,10 @@ public class User {
         Pattern emailChecker = Pattern.compile(emailRegEx);
 
         return emailChecker.matcher(email).matches();
+    }
+
+    public static ArrayList<User> getAllUsers(){
+        return allUsers;
     }
 
 

@@ -45,7 +45,6 @@ public class Task {
 
         setStatus(TaskStatus.IN_PROGRESS);
         
-        return;
     }
 
     /**
