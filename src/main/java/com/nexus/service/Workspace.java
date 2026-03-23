@@ -1,5 +1,6 @@
 package com.nexus.service;
 
+import com.nexus.Main;
 import com.nexus.model.Task;
 import com.nexus.model.TaskStatus;
 import com.nexus.model.User;
@@ -28,8 +29,9 @@ public class Workspace {
 
     public List<User> getTopPerformers(){
         /*Um método que retorna os 3 usuários que possuem o maior número de tarefas no status DONE */
-        List<User> topPerformers = null; //= getTasks().stream();
-        //TODO
+        List<User> allUsers = Main.getUsers(); 
+        
+
 
         return topPerformers; 
 
@@ -37,7 +39,7 @@ public class Workspace {
 
     public List<User> getOverloaded(){
         /*Listar todos os usuários cuja carga de trabalho atual (IN_PROGRESS) ultrapassa 10 tarefas. */
-        List<User> allUsers = User.getAllUsers(); //getTasks().stream();
+        List<User> allUsers = Main.getUsers(); 
         
         List<User> overloaded = allUsers.stream()
         .filter(usr -> usr.calculateWorkload() > 10)

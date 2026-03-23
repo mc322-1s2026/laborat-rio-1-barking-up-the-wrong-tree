@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class User {
 
-    private static ArrayList<User> allUsers = new ArrayList<>();
     private final String username;
     private final String email;
 
@@ -53,9 +52,6 @@ public class User {
         return emailChecker.matcher(email).matches();
     }
 
-    public static ArrayList<User> getAllUsers(){
-        return allUsers;
-    }
-
+   
 
 }
