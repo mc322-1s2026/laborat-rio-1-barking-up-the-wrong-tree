@@ -81,8 +81,7 @@ public class Workspace {
         
         float ratio = (tasksDONE/ (getTasks().size() ));
 
-        String projectHealth = Float.toString(ratio);
-        String.format("%.2f %%", projectHealth);
+        String projectHealth = String.format("%.2f %%", ratio);
 
         return projectHealth;
     }
