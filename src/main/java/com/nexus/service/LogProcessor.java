@@ -72,9 +72,6 @@ public class LogProcessor {
                                 workspace.setTaskUser(tarefa_id, username, users);
 
 
-
-
-
                                 System.out.println("Tarefa " + tarefa_id.getTitle() +  " atribuida ao user " + username);
                             }
                             case "CHANGE_STATUS" -> {
@@ -82,18 +79,23 @@ public class LogProcessor {
                                 String newStatus = p[2];
                                 Integer taskIdInt = Integer.parseInt(taskId);
                                 Task tarefa_id = workspace.getTask_by_ID(taskIdInt, workspace.getTasks());
-                                workspace.change_status(tarefa_id, newStatus);
-                                System.out.println("Tarefa " + tarefa_id.getTitle() + "movido para " + newStatus);
+                                try{
+                                    workspace.change_status(tarefa_id, newStatus);
+                                    System.out.println("Tarefa " + tarefa_id.getTitle() + " movido para " + newStatus);
+                                } catch(NexusValidationException e){
+
+                                }
                                 
 
                             }
                             case "REPORT_STATUS" -> {
                                 
+                        
                                 String projectHealth = workspace.getProjectHealth();
                                 if(projectHealth==""){
-                                    System.out.println("Saúde do Projeto: Não há tarefas no momento!");
+                                    System.out.println("\nSaúde do Projeto: Não há tarefas no momento!");
                                 } else{
-                                    System.out.println("Saúde do Projeto " + projectHealth);
+                                    System.out.println("\nSaúde do Projeto " + projectHealth);
                                 }
 
                                 List<User> topPerformers = workspace.getTopPerformers();

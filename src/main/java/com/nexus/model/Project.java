@@ -15,7 +15,7 @@ public class Project {
 
     public Project(String nome, Integer maxWorkload){
 
-        if( nome.isEmpty() || nome == null){
+        if(nome.isEmpty() || nome == null){
             throw new NexusValidationException("Nome do projeto nao pode ser vazio");
         }
         if( maxWorkload < 0){
@@ -29,6 +29,7 @@ public class Project {
 
     public void addTask(Task task){
         if (getCurrentWorkload() + task.getEffort() > maxWorkload){
+            
             throw new NexusValidationException("Ultrapassou o limite de workload");
         }
 

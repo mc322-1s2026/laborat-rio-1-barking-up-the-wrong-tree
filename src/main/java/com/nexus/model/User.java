@@ -45,7 +45,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "Username: "+ this.username + "|" + "Address: " + this.email;
+        return "Username: "+ this.username + "  |  " + "Address: " + this.email;
     }
 
     private boolean isEmailValid(String email){
