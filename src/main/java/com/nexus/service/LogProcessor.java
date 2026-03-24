@@ -1,7 +1,7 @@
 package com.nexus.service;
 
 import com.nexus.model.*;
-import com.nexus.service.*;
+// import com.nexus.service.*;
 import com.nexus.exception.NexusValidationException;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -45,7 +45,7 @@ public class LogProcessor {
                                 Integer effortInt = Integer.parseInt(effort);
                                 Task nova_task = new Task(taskName, deadlineDate, effortInt);
                                 workspace.addTask(nova_task);
-                                //TODO: implementar adicionar task projeto
+                                //TODO: bug de tarefa nao entrar em projeto e ainda existir
                                 Integer index = workspace.Project_existe(projectName);
                                 if(index != -1){
                                     workspace.AddTaskProject(nova_task, index);
