@@ -3,6 +3,7 @@ CREATE_USER;bob.jones;bob@company.com
 CREATE_USER;carol.white;carol@company.com
 REPORT_STATUS
 
+CREATE_USER;invalid.email;notanemail.txt
 
 CREATE_PROJECT;Backend;120
 CREATE_PROJECT;Frontend;100

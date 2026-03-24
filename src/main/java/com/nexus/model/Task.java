@@ -44,14 +44,14 @@ public class Task {
      * Move a tarefa para IN_PROGRESS.
      * Regra: Só é possível se houver um owner atribuído e não estiver BLOCKED.
      */
-    public void moveToInProgress(User user, Task tarefa) {
+    public void moveToInProgress() {
         // Se falhar, incrementar totalValidationErrors e lançar NexusValidationException
 
-        if(user != tarefa.owner){
+        if(getOwner() == null){
             incrementTotalValidationErrors();
             throw new NexusValidationException("Operação só é permitida se houver um User atribuído como owner");
         }
-
+        
 
         setStatus(TaskStatus.IN_PROGRESS);
         
@@ -71,7 +71,7 @@ public class Task {
         setStatus(TaskStatus.DONE);
     }
 
-    public void setBlocked(boolean blocked) {
+    public void setBlocked() {
         TaskStatus status = getStatus();
         if(status == TaskStatus.DONE){
             incrementTotalValidationErrors();

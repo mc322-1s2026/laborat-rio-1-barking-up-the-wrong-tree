@@ -2,7 +2,7 @@ package com.nexus.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.nexus.model.Task;
+// import com.nexus.model.Task;
 import com.nexus.exception.*;
 
 public class Project {
@@ -54,7 +54,7 @@ public class Project {
 
     public int getCurrentWorkload(){
 
-        return this.getCurrentWorkload();
+        return this.currentWorkload;
     }
 
     public float getTotalBudget(){
