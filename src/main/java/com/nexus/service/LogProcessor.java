@@ -82,7 +82,7 @@ public class LogProcessor {
                                 List<User> overloaded = workspace.getOverloaded();
                                 System.out.println("\nOverloaded: ");
                                 if(overloaded.size()==0){ //o java é bizarro, não deixa fazer if(!) com int
-                                    System.out.println("Não há usuários cujas tarefas ultrapassem 10!");
+                                    System.out.println("Não há usuários cujas tarefas ultrapassem 10");
                                 } else{
                                     for(User user : overloaded) { System.out.println(user); }
                                 }
