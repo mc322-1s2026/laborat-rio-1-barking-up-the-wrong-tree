@@ -83,12 +83,31 @@ public class LogProcessor {
 
                             }
                             case "REPORT_STATUS" -> {
-                                System.out.println("Mexer dps ");
                                 
-                                workspace.getTopPerformers();
-                                workspace.getOverloaded();
-                                workspace.getProjectHealth();
-                                workspace.getBottleneck();
+                                String projectHealth = workspace.getProjectHealth();
+                                System.out.println("Saúde do Projeto: ");
+                                if(projectHealth==""){
+                                    System.out.println("Não há tarefas no momento!");
+                                } else{
+                                    System.out.println("Saúde do Projeto " + projectHealth);
+                                }
+
+                                List<User> topPerformers = workspace.getTopPerformers();
+                                System.out.println("\nTop Performers: ");
+                                for(User user : topPerformers) { System.out.println(user); }
+
+
+                                List<User> overloaded = workspace.getOverloaded();
+                                System.out.println("\nOverloaded: ");
+                                if(overloaded.size()==0){ //o java é bizarro, não deixa fazer if(!) com int
+                                    System.out.println("Não há usuários cujas tarefas ultrapassem 10");
+                                } else{
+                                    for(User user : overloaded) { System.out.println(user); }
+                                }
+
+
+                                TaskStatus status = workspace.getBottleneck();
+                                System.out.println("\nGlobal Bottleneck: " + status);
                             }
 
                             case "CREATE_PROJECT"-> {

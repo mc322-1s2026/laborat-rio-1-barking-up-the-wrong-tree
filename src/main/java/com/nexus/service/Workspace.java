@@ -75,6 +75,10 @@ public class Workspace {
         .filter(task -> task.getStatus()==TaskStatus.DONE)
         .count();
 
+        if(getTasks().size()==0){
+            return "";
+        }
+        
         float ratio = (tasksDONE/ (getTasks().size() ));
 
         String projectHealth = Float.toString(ratio);
