@@ -43,6 +43,11 @@ public class User {
         return workload;
     }
 
+    @Override
+    public String toString() {
+        return "Username: "+ this.username + "|" + "Address: " + this.email;
+    }
+
     private boolean isEmailValid(String email){
         
         if(email == null || email.isBlank()){
