@@ -1,6 +1,7 @@
 package com.nexus.service;
 
 import com.nexus.Main;
+import com.nexus.exception.NexusValidationException;
 import com.nexus.model.Project;
 import com.nexus.model.Task;
 import com.nexus.model.TaskStatus;
@@ -114,5 +115,30 @@ public class Workspace {
         projects.get(Posi_project_add).addTask(task);
         return;
     }
+
+    public void setTaskUser(Integer Id_task, String user, List<User> lista_users){
+
+
+
+        Integer num_task = tasks.size();
+        User user_receber = User.user_existe(user, lista_users);
+        for( int i = 0; i < num_task; i++){
+            Integer id_temp = tasks.get(i).getId();
+            if (id_temp == Id_task){
+                tasks.get(i).setOwner(user_receber);
+                return;
+            }
+
+
+        }
+        throw new NexusValidationException("Id de tarefa nao encontrada");
+        
+
+
+
+
+        
+    }
+
 
 }

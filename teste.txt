@@ -1,0 +1,41 @@
+
+======= NEXUS CORE: MENU =======
+1. Adicionar Usuário
+2. Adicionar Tarefa
+3. Listar Todas as Tarefas
+4. Processar Log de Ações
+5. Debug
+0. Sair
+Escolha uma opção: 1. Carregar Log V1 (Básico)
+2. Carregar Log V2 (Desafio)
+[LOG] Usuário criado: alice.smith
+[LOG] Usuário criado: bob.jones
+[LOG] Usuário criado: carol.white
+Projeto Backend criado
+Projeto Frontend criado
+Task Setup Database com sucesso e adicionada ao projeto Backend
+Task API Development com sucesso e adicionada ao projeto Backend
+Task UI Components com sucesso e adicionada ao projeto Frontend
+Task Testing Suite com sucesso e adicionada ao projeto Frontend
+Tarefa atribuida ao user alice.smith
+Tarefa atribuida ao user bob.jones
+Tarefa atribuida ao user carol.white
+Tarefa atribuida ao user alice.smith
+Mexer dps
+Mexer dps
+Mexer dps
+Mexer dps
+Mexer dps
+Mexer dps
+Mexer dps
+Mexer dps
+Mexer dps
+Task Bug Fixes com sucesso e adicionada ao projeto Backend
+Tarefa atribuida ao user alice.smith
+Tarefa atribuida ao user bob.jones
+Tarefa atribuida ao user carol.white
+Mexer dps
+Mexer dps
+Mexer dps
+Mexer dps
+Mexer dps 

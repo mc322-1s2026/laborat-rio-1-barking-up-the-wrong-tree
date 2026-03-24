@@ -55,13 +55,21 @@ public class LogProcessor {
                                 }
 
                                 
-                                System.out.println("Task " + taskName + " com sucesso e adicionada ao projeto" + projectName);
+                                System.out.println("Task " + taskName + " com sucesso e adicionada ao projeto " + projectName);
                             }
+                            
+                            
                             case "ASSIGN_USER" -> {
                                 String taskId = p[1];
                                 String username = p[2];
+                                Integer taskIdInt = Integer.parseInt(taskId);
+                                workspace.setTaskUser(taskIdInt, username, users);
 
-                                System.out.println("Mexer dps");
+
+
+
+
+                                System.out.println("Tarefa atribuida ao user " + username);
                             }
                             case "CHANGE_STATUS" -> {
                                 String taskId = p[1];

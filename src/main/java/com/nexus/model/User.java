@@ -75,6 +75,18 @@ public class User {
         return tasks;
     }
 
+    public static User user_existe(String user_desc, List<User> lista_user){
+        Integer tmn_list = lista_user.size();
+        for(int i = 0; i < tmn_list; i++){
+            if (lista_user.get(i).consultUsername().equals(user_desc)){
+                return lista_user.get(i);
+            }
+
+        }
+
+        throw new NexusValidationException("User nao existe");
+    }
+
    
 
 }
