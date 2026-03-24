@@ -32,8 +32,13 @@ public class LogProcessor {
                     try {
                         switch (action) {
                             case "CREATE_USER" -> {
-                                users.add(new User(p[1], p[2]));
-                                System.out.println("[LOG] Usuário criado: " + p[1]);
+                                try {
+                                    User user = new User(p[1], p[2]);
+                                    users.add(user);
+                                    System.out.println("[LOG] Usuário criado: " + p[1]);
+                                } catch(NexusValidationException e) {
+                                    System.out.println("Criação de usuário inválida!");
+                                }
                             }
                             
                             case "CREATE_TASK" -> {
@@ -85,9 +90,8 @@ public class LogProcessor {
                             case "REPORT_STATUS" -> {
                                 
                                 String projectHealth = workspace.getProjectHealth();
-                                System.out.println("Saúde do Projeto: ");
                                 if(projectHealth==""){
-                                    System.out.println("Não há tarefas no momento!");
+                                    System.out.println("Saúde do Projeto: Não há tarefas no momento!");
                                 } else{
                                     System.out.println("Saúde do Projeto " + projectHealth);
                                 }
