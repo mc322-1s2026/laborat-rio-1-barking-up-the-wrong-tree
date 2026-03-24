@@ -55,7 +55,7 @@ public class LogProcessor {
                                 }
 
                                 
-                                System.out.println("Task " + taskName + " com sucesso e adicionada ao projeto");
+                                System.out.println("Task " + taskName + " com sucesso e adicionada ao projeto" + projectName);
                             }
                             case "ASSIGN_USER" -> {
                                 String taskId = p[1];
