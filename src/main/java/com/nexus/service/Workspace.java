@@ -94,7 +94,7 @@ public class Workspace {
         long countTODO = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.TO_DO).count();
         long countINPROGRESS = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.IN_PROGRESS).count();
 
-        HashMFap<Long, TaskStatus> statusmap = new HashMap();
+        HashMap<Long, TaskStatus> statusmap = new HashMap();
 
         statusmap.put(countBlocked, TaskStatus.BLOCKED);
         statusmap.put(countTODO, TaskStatus.TO_DO);
