@@ -116,29 +116,42 @@ public class Workspace {
         return;
     }
 
-    public void setTaskUser(Integer Id_task, String user, List<User> lista_users){
-
-
-
-        Integer num_task = tasks.size();
+    public void setTaskUser(Task tarefa, String user, List<User> lista_users){
         User user_receber = User.user_existe(user, lista_users);
-        for( int i = 0; i < num_task; i++){
-            Integer id_temp = tasks.get(i).getId();
-            if (id_temp == Id_task){
-                tasks.get(i).setOwner(user_receber);
-                return;
+        tarefa.setOwner(user_receber);
+       
+    }
+
+    public void change_status(Task tarefa_trocar, String novo_status){
+        switch(novo_status){
+            case "IN_PROGRESS" ->{  
+                  tarefa_trocar.moveToInProgress();
+                
             }
+            case "BLOCKED" -> {
+                tarefa_trocar.setBlocked();
+            }
+            case "DONE" ->{
+                tarefa_trocar.markAsDone();
+            }
+            default -> new NexusValidationException("Status " + novo_status + " nao e um status valido");
+
 
 
         }
-        throw new NexusValidationException("Id de tarefa nao encontrada");
-        
 
 
-
-
-        
+        return;
     }
 
+    public Task getTask_by_ID(Integer id, List<Task> lista_tarefas){
+        Integer tmnh_lista = lista_tarefas.size();
+        for(int i = 0; i < tmnh_lista; i++){
+            if (lista_tarefas.get(i).getId() == id){
+                return lista_tarefas.get(i);
+            }
 
+        }
+        throw new NexusValidationException("Tarefa com Id " + id + " nao encontrada");
+    }
 }

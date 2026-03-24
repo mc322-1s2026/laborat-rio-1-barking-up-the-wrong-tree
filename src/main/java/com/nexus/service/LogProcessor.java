@@ -63,19 +63,23 @@ public class LogProcessor {
                                 String taskId = p[1];
                                 String username = p[2];
                                 Integer taskIdInt = Integer.parseInt(taskId);
-                                workspace.setTaskUser(taskIdInt, username, users);
+                                Task tarefa_id = workspace.getTask_by_ID(taskIdInt, workspace.getTasks());
+                                workspace.setTaskUser(tarefa_id, username, users);
 
 
 
 
 
-                                System.out.println("Tarefa atribuida ao user " + username);
+                                System.out.println("Tarefa " + tarefa_id.getTitle() +  " atribuida ao user " + username);
                             }
                             case "CHANGE_STATUS" -> {
                                 String taskId = p[1];
                                 String newStatus = p[2];
-
-                                System.out.println("Mexer dps");
+                                Integer taskIdInt = Integer.parseInt(taskId);
+                                Task tarefa_id = workspace.getTask_by_ID(taskIdInt, workspace.getTasks());
+                                workspace.change_status(tarefa_id, newStatus);
+                                System.out.println("Tarefa " + tarefa_id.getTitle() + "movido para " + newStatus);
+                                
 
                             }
                             case "REPORT_STATUS" -> {
@@ -96,7 +100,7 @@ public class LogProcessor {
                                 System.out.println("Projeto " + nome_project + " criado");                            
                                 }
 
-                            default -> System.err.println("[WARN] Ação desconhecida: " + action);
+                            default -> new NexusValidationException("[WARN] Ação desconhecida: " + action);
                         }
                     } catch (NexusValidationException e) {
                         System.err.println("[ERRO DE REGRAS] Falha no comando '" + line + "': " + e.getMessage());

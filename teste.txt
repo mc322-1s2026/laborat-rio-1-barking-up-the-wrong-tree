@@ -17,25 +17,23 @@ Task Setup Database com sucesso e adicionada ao projeto Backend
 Task API Development com sucesso e adicionada ao projeto Backend
 Task UI Components com sucesso e adicionada ao projeto Frontend
 Task Testing Suite com sucesso e adicionada ao projeto Frontend
-Tarefa atribuida ao user alice.smith
-Tarefa atribuida ao user bob.jones
-Tarefa atribuida ao user carol.white
-Tarefa atribuida ao user alice.smith
-Mexer dps
-Mexer dps
-Mexer dps
-Mexer dps
-Mexer dps
-Mexer dps
-Mexer dps
-Mexer dps
-Mexer dps
+Tarefa Setup Database atribuida ao user alice.smith
+Tarefa API Development atribuida ao user bob.jones
+Tarefa UI Components atribuida ao user carol.white
+Tarefa Testing Suite atribuida ao user alice.smith
+Tarefa Setup Databasemovido para IN_PROGRESS
+Tarefa API Developmentmovido para IN_PROGRESS
+Tarefa UI Componentsmovido para IN_PROGRESS
+Tarefa Setup Databasemovido para DONE
+Tarefa API Developmentmovido para BLOCKED
+Tarefa UI Componentsmovido para DONE
+Tarefa Testing Suitemovido para IN_PROGRESS
+Tarefa Testing Suitemovido para DONE
 Task Bug Fixes com sucesso e adicionada ao projeto Backend
-Tarefa atribuida ao user alice.smith
-Tarefa atribuida ao user bob.jones
-Tarefa atribuida ao user carol.white
-Mexer dps
-Mexer dps
-Mexer dps
-Mexer dps
+Tarefa Bug Fixes atribuida ao user alice.smith
+Tarefa Optimization atribuida ao user bob.jones
+Tarefa Documentation atribuida ao user carol.white
+Tarefa Bug Fixesmovido para IN_PROGRESS
+Tarefa Optimizationmovido para IN_PROGRESS
+Tarefa Documentationmovido para IN_PROGRESS
 Mexer dps 
