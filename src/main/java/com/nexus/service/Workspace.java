@@ -1,6 +1,7 @@
 package com.nexus.service;
 
 import com.nexus.Main;
+import com.nexus.exception.NexusValidationException;
 import com.nexus.model.Project;
 import com.nexus.model.Task;
 import com.nexus.model.TaskStatus;
@@ -115,4 +116,42 @@ public class Workspace {
         return;
     }
 
+    public void setTaskUser(Task tarefa, String user, List<User> lista_users){
+        User user_receber = User.user_existe(user, lista_users);
+        tarefa.setOwner(user_receber);
+       
+    }
+
+    public void change_status(Task tarefa_trocar, String novo_status){
+        switch(novo_status){
+            case "IN_PROGRESS" ->{  
+                  tarefa_trocar.moveToInProgress();
+                
+            }
+            case "BLOCKED" -> {
+                tarefa_trocar.setBlocked();
+            }
+            case "DONE" ->{
+                tarefa_trocar.markAsDone();
+            }
+            default -> new NexusValidationException("Status " + novo_status + " nao e um status valido");
+
+
+
+        }
+
+
+        return;
+    }
+
+    public Task getTask_by_ID(Integer id, List<Task> lista_tarefas){
+        Integer tmnh_lista = lista_tarefas.size();
+        for(int i = 0; i < tmnh_lista; i++){
+            if (lista_tarefas.get(i).getId() == id){
+                return lista_tarefas.get(i);
+            }
+
+        }
+        throw new NexusValidationException("Tarefa com Id " + id + " nao encontrada");
+    }
 }

@@ -1,7 +1,7 @@
 package com.nexus.service;
 
 import com.nexus.model.*;
-import com.nexus.service.*;
+// import com.nexus.service.*;
 import com.nexus.exception.NexusValidationException;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -45,7 +45,7 @@ public class LogProcessor {
                                 Integer effortInt = Integer.parseInt(effort);
                                 Task nova_task = new Task(taskName, deadlineDate, effortInt);
                                 workspace.addTask(nova_task);
-                                //TODO: implementar adicionar task projeto
+                                //TODO: bug de tarefa nao entrar em projeto e ainda existir
                                 Integer index = workspace.Project_existe(projectName);
                                 if(index != -1){
                                     workspace.AddTaskProject(nova_task, index);
@@ -55,19 +55,31 @@ public class LogProcessor {
                                 }
 
                                 
-                                System.out.println("Task " + taskName + " com sucesso e adicionada ao projeto" + projectName);
+                                System.out.println("Task " + taskName + " com sucesso e adicionada ao projeto " + projectName);
                             }
+                            
+                            
                             case "ASSIGN_USER" -> {
                                 String taskId = p[1];
                                 String username = p[2];
+                                Integer taskIdInt = Integer.parseInt(taskId);
+                                Task tarefa_id = workspace.getTask_by_ID(taskIdInt, workspace.getTasks());
+                                workspace.setTaskUser(tarefa_id, username, users);
 
-                                System.out.println("Mexer dps");
+
+
+
+
+                                System.out.println("Tarefa " + tarefa_id.getTitle() +  " atribuida ao user " + username);
                             }
                             case "CHANGE_STATUS" -> {
                                 String taskId = p[1];
                                 String newStatus = p[2];
-
-                                System.out.println("Mexer dps");
+                                Integer taskIdInt = Integer.parseInt(taskId);
+                                Task tarefa_id = workspace.getTask_by_ID(taskIdInt, workspace.getTasks());
+                                workspace.change_status(tarefa_id, newStatus);
+                                System.out.println("Tarefa " + tarefa_id.getTitle() + "movido para " + newStatus);
+                                
 
                             }
                             case "REPORT_STATUS" -> {
@@ -88,7 +100,7 @@ public class LogProcessor {
                                 System.out.println("Projeto " + nome_project + " criado");                            
                                 }
 
-                            default -> System.err.println("[WARN] Ação desconhecida: " + action);
+                            default -> new NexusValidationException("[WARN] Ação desconhecida: " + action);
                         }
                     } catch (NexusValidationException e) {
                         System.err.println("[ERRO DE REGRAS] Falha no comando '" + line + "': " + e.getMessage());
