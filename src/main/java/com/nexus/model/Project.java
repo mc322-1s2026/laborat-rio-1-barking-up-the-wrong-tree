@@ -29,7 +29,9 @@ public class Project {
 
     public void addTask(Task task){
         if (getCurrentWorkload() + task.getEffort() > maxWorkload){
+            Task.destruir_task(task);
             throw new NexusValidationException("Ultrapassou o limite de workload");
+            
         }
 
         this.Tarefas.add(task);

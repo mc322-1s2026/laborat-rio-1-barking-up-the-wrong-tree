@@ -1,7 +1,7 @@
 CREATE_USER;alice.smith;alice@company.com
 CREATE_USER;bob.jones;bob@company.com
 CREATE_USER;carol.white;carol@company.com
-REPORT_STATUS
+
 
 CREATE_USER;invalid.email;notanemail.txt
 

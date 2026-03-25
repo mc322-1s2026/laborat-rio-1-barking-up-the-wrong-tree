@@ -114,4 +114,11 @@ public class Task {
         this.owner = nome;
         return;
     }
+
+    public static void destruir_task(Task tarefa_a_morrer){
+        allTasks.remove(tarefa_a_morrer);
+        tarefa_a_morrer = null;
+        return;
+
+    }
 }
