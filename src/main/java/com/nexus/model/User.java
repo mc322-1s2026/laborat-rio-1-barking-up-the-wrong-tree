@@ -28,11 +28,22 @@ public class User {
         this.email = email;
     }
 
+    /*
+    * Retorna o email do usuário
+    * @return: String email
+    */
     public String consultEmail() {return email;}
 
+    /*
+    *Retorna o username do usuario
+    * @return string Username
+    */
     public String consultUsername() {return username;}
 
-
+    /*
+    * calcula o workload da task
+    * @return: long workload
+    */
     public long calculateWorkload(){
         ArrayList<Task> allTasks = Task.getAllTasks();
 
@@ -43,11 +54,19 @@ public class User {
         return workload;
     }
 
+    /*
+    * Sobrescreve a função toString da classe. Quando se usa println nela, o output fica mais bonitinho
+    */
     @Override
     public String toString() {
         return "Username: "+ this.username + "  |  " + "Address: " + this.email;
     }
 
+    /*
+    * Verifica se o email é valido usando expressões regulares
+    * @param: String email - o email a se verificar
+    * @return: True se for válido, false caso contrário
+    */
     private boolean isEmailValid(String email){
         
         if(email == null || email.isBlank()){
@@ -60,6 +79,10 @@ public class User {
         return emailChecker.matcher(email).matches();
     }
 
+    /*
+    * Conta quantas tarefas foram marcadas como DONE
+    * @return: long nofDoneTasks
+    */
     public long countDoneTasks(){
         List<Task> userTasks = getUserTasks();
 
@@ -70,6 +93,10 @@ public class User {
         return nofDoneTasks;
     }
 
+    /*
+    * Retorna uma lista com todas as tarefas de um usuário
+    * @return: List<Task> com as tarefas
+    */
     public List<Task> getUserTasks(){
         ArrayList<Task> allTasks = Task.getAllTasks();
 
@@ -80,6 +107,11 @@ public class User {
         return tasks;
     }
 
+    /*
+    * Verifica se um usuário existe pelo nome
+    * @param: String user_desc - descroção
+    * @param: List<User> lista_user
+    */
     public static User user_existe(String user_desc, List<User> lista_user){
         Integer tmn_list = lista_user.size();
         for(int i = 0; i < tmn_list; i++){

@@ -99,9 +99,11 @@ public class Workspace {
         return projectHealth;
     }
 
-    
+    /*
+    *Identificar qual o status que possui o maior número de tarefas no sistema (exceto DONE)
+    * @return: (TaskStatus) - taskstatus com maior número de tarefas
+    */
     public TaskStatus getBottleneck(){
-        /*Identificar qual o status que possui o maior número de tarefas no sistema (exceto DONE) */
 
         long countBlocked = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.BLOCKED).count();
         long countTODO = getTasks().stream().filter(task -> task.getStatus() == TaskStatus.TO_DO).count();
@@ -118,6 +120,12 @@ public class Workspace {
         return statusmap.get(maxTask);
         
     }
+    /*
+    * Verifica se um projeto com determinado nome existe.
+    * @param: Stringnome_project - nome do projeto
+    * 
+    * @return: -1 se não existe, inteiro arbitrário caso contrário
+    */
     public Integer Project_existe(String nome_project){
         Integer size_proj = projects.size();
         for(int i = 0; i < size_proj; i++){
@@ -128,17 +136,34 @@ public class Workspace {
 
         return -1;        
     }
+
+    /*
+    * Adiciona uma tarefa ao projeto
+    * @param: Task task - a tarefa
+    * @param: Integer posi_project_add - o projeto
+    */
     public void AddTaskProject(Task task, Integer Posi_project_add){
         projects.get(Posi_project_add).addTask(task);
         return;
     }
 
+    /*
+    * Seta um usuário como dono de uma tarefa, se ele existir
+    * @param: Task tarefa - a tarefa
+    * @param: String user - o futuro dono
+    * @param: List<User> lista_user - a lista de usuários
+    */
     public void setTaskUser(Task tarefa, String user, List<User> lista_users){
         User user_receber = User.user_existe(user, lista_users);
         tarefa.setOwner(user_receber);
        
     }
 
+    /*
+    * Gerencia a mudança de status de uma tarefa
+    * @param: Task tarefa_trocar - tarefa a qual se modificará
+    * @param: String novo_status  - futuro status da tarefa
+    */
     public void change_status(Task tarefa_trocar, String novo_status){
         switch(novo_status){
             case "IN_PROGRESS" ->{  
@@ -161,6 +186,12 @@ public class Workspace {
         return;
     }
 
+    /*
+    * Dado um ID, retorna a task com o ID correspondente
+    * @param: Integer id - o id da task
+    * @param: List<Task> lista_tarefas - a lista de tasks
+    * @return: Task
+    */
     public Task getTask_by_ID(Integer id, List<Task> lista_tarefas){
         Integer tmnh_lista = lista_tarefas.size();
         for(int i = 0; i < tmnh_lista; i++){
