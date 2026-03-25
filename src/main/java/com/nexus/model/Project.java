@@ -15,7 +15,7 @@ public class Project {
 
     public Project(String nome, Integer maxWorkload){
 
-        if( nome.isEmpty() || nome == null){
+        if(nome.isEmpty() || nome == null){
             throw new NexusValidationException("Nome do projeto nao pode ser vazio");
         }
         if( maxWorkload < 0){
@@ -27,6 +27,10 @@ public class Project {
     }
 
 
+    /*
+    * Adiciona uma task
+    * @param: Task task - task a qual se deseja adicionar
+    */
     public void addTask(Task task){
         if (getCurrentWorkload() + task.getEffort() > maxWorkload){
             Task.destruir_task(task);
@@ -42,23 +46,42 @@ public class Project {
 
     //Getters
 
+    /* 
+    * retorna uma list com todas as tarefas
+    * @return: List<Task> com todas as tasks do projeto
+    */
     public List<Task> getTarefas(){
         return this.Tarefas;
     }
 
+    /*
+    * retorna o nome do projeto
+    */
     public String getNome(){
         return this.Nome;
     }
 
+    /*
+    * Retorna o workload maximo
+    * @return: maxworkload
+    */
     public int getMaxWorkload(){
         return this.maxWorkload;
     }
 
+    /*
+    * Retorna o workload atual
+    * @return: currentWorkload
+    */
     public int getCurrentWorkload(){
 
         return this.currentWorkload;
     }
 
+    /*
+    * Retorna o budgetTotal
+    * @return: totalBudget
+    */
     public float getTotalBudget(){
         return this.totalBudget;
     }

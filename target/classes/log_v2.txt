@@ -1,7 +1,8 @@
 CREATE_USER;alice.smith;alice@company.com
 CREATE_USER;bob.jones;bob@company.com
 CREATE_USER;carol.white;carol@company.com
-
+CREATE_USER;invalid.email;notanemail.txt
+REPORT_STATUS
 
 CREATE_USER;invalid.email;notanemail.txt
 
@@ -19,8 +20,8 @@ ASSIGN_USER;3;carol.white
 ASSIGN_USER;4;alice.smith
 
 CHANGE_STATUS;1;IN_PROGRESS
-CHANGE_STATUS;2;IN_PROGRESS
-CHANGE_STATUS;3;IN_PROGRESS
+CHANGE_STATUS;2;DONE
+CHANGE_STATUS;3;BLOCKED
 
 CHANGE_STATUS;1;DONE
 CHANGE_STATUS;2;BLOCKED

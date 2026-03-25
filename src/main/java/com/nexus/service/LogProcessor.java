@@ -32,8 +32,13 @@ public class LogProcessor {
                     try {
                         switch (action) {
                             case "CREATE_USER" -> {
-                                users.add(new User(p[1], p[2]));
-                                System.out.println("[LOG] Usuário criado: " + p[1]);
+                                try {
+                                    User user = new User(p[1], p[2]);
+                                    users.add(user);
+                                    System.out.println("[LOG] Usuário criado: " + p[1]);
+                                } catch(NexusValidationException e) {
+                                    System.out.println("Criação de usuário inválida!");
+                                }
                             }
                             
                             case "CREATE_TASK" -> {
@@ -67,9 +72,6 @@ public class LogProcessor {
                                 workspace.setTaskUser(tarefa_id, username, users);
 
 
-
-
-
                                 System.out.println("Tarefa " + tarefa_id.getTitle() +  " atribuida ao user " + username);
                             }
                             case "CHANGE_STATUS" -> {
@@ -77,19 +79,23 @@ public class LogProcessor {
                                 String newStatus = p[2];
                                 Integer taskIdInt = Integer.parseInt(taskId);
                                 Task tarefa_id = workspace.getTask_by_ID(taskIdInt, workspace.getTasks());
-                                workspace.change_status(tarefa_id, newStatus);
-                                System.out.println("Tarefa " + tarefa_id.getTitle() + "movido para " + newStatus);
+                                try{
+                                    workspace.change_status(tarefa_id, newStatus);
+                                    System.out.println("Tarefa " + tarefa_id.getTitle() + " movido para " + newStatus);
+                                } catch(NexusValidationException e){
+
+                                }
                                 
 
                             }
                             case "REPORT_STATUS" -> {
                                 
+                        
                                 String projectHealth = workspace.getProjectHealth();
-                                System.out.println("Saúde do Projeto: ");
                                 if(projectHealth==""){
-                                    System.out.println("Não há tarefas no momento!");
+                                    System.out.println("\nSaúde do Projeto: Não há tarefas no momento!");
                                 } else{
-                                    System.out.println("Saúde do Projeto " + projectHealth);
+                                    System.out.println("\nSaúde do Projeto " + projectHealth);
                                 }
 
                                 List<User> topPerformers = workspace.getTopPerformers();

@@ -58,7 +58,7 @@ public class Task {
     }
 
     /**
-     * Finaliza a tarefa.
+     * Marca a Tarefa como FEITA (DONE)
      * Regra: Só pode ser movida para DONE se não estiver BLOCKED.
      */
     public void markAsDone() {
@@ -71,6 +71,10 @@ public class Task {
         setStatus(TaskStatus.DONE);
     }
 
+    /*
+    * Bloqueia uma tarefa (a marca como BLOCKED)
+    * Regra: a Tarefa não pode estar em DONE
+    */
     public void setBlocked() {
         TaskStatus status = getStatus();
         if(status == TaskStatus.DONE){
@@ -94,22 +98,39 @@ public class Task {
     }
 
     //setters
+
+    /*
+    * @param: TaskStatus newstatus - o novo status para o qual se deseja mudar
+    */
     public void setStatus(TaskStatus newstatus){
         this.status = newstatus;
     }
 
+    /*
+    * Incrementa o total de erros de validação
+    */
     public void incrementTotalValidationErrors(){
         Task.totalValidationErrors++;
     }
 
+    /*
+    * Incrementa o workload
+    */
     public void incrementWorkload(){
         Task.activeWorkload++;
     }
 
+    /*
+    * Incrementa o total de tasks criadas
+    */
     public void incrementTotalTasksCreated(){
         Task.totalTasksCreated++;
     }
 
+    /*
+    * Muda o owner da task
+    * @param: User nome - nome do futuro owner
+    */
     public void setOwner(User nome){
         this.owner = nome;
         return;
