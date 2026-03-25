@@ -21,19 +21,47 @@ Tarefa Setup Database atribuida ao user alice.smith
 Tarefa API Development atribuida ao user bob.jones
 Tarefa UI Components atribuida ao user carol.white
 Tarefa Testing Suite atribuida ao user alice.smith
-Tarefa Setup Databasemovido para IN_PROGRESS
-Tarefa API Developmentmovido para IN_PROGRESS
-Tarefa UI Componentsmovido para IN_PROGRESS
-Tarefa Setup Databasemovido para DONE
-Tarefa API Developmentmovido para BLOCKED
-Tarefa UI Componentsmovido para DONE
-Tarefa Testing Suitemovido para IN_PROGRESS
-Tarefa Testing Suitemovido para DONE
+Tarefa Setup Database movido para IN_PROGRESS
+Tarefa API Development movido para DONE
+Tarefa UI Components movido para BLOCKED
+Tarefa Setup Database movido para DONE
+Tarefa API Development movido para DONE
+Tarefa Testing Suite movido para IN_PROGRESS
+Tarefa Testing Suite movido para DONE
 Task Bug Fixes com sucesso e adicionada ao projeto Backend
 Tarefa Bug Fixes atribuida ao user alice.smith
-Tarefa Optimization atribuida ao user bob.jones
-Tarefa Documentation atribuida ao user carol.white
-Tarefa Bug Fixesmovido para IN_PROGRESS
-Tarefa Optimizationmovido para IN_PROGRESS
-Tarefa Documentationmovido para IN_PROGRESS
-Mexer dps 
+Tarefa Bug Fixes movido para IN_PROGRESS
+
+Saúde do Projeto 0.00 %
+
+Top Performers: 
+Username: alice.smith  |  Address: alice@company.com
+Username: bob.jones  |  Address: bob@company.com
+Username: carol.white  |  Address: carol@company.com
+
+Overloaded: 
+Não há usuários cujas tarefas ultrapassem 10
+
+Global Bottleneck: IN_PROGRESS
+Tarefa Bug Fixes movido para DONE
+
+Saúde do Projeto 0.00 %
+
+Top Performers: 
+Username: alice.smith  |  Address: alice@company.com
+Username: bob.jones  |  Address: bob@company.com
+Username: carol.white  |  Address: carol@company.com
+
+Overloaded: 
+Não há usuários cujas tarefas ultrapassem 10
+
+Global Bottleneck: BLOCKED
+
+======= NEXUS CORE: MENU =======
+1. Adicionar Usuário
+2. Adicionar Tarefa
+3. Listar Todas as Tarefas
+4. Processar Log de Ações
+5. Debug
+0. Sair
+Escolha uma opção: 

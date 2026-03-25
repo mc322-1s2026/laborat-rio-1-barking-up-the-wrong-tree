@@ -37,7 +37,7 @@ public class LogProcessor {
                                     users.add(user);
                                     System.out.println("[LOG] Usuário criado: " + p[1]);
                                 } catch(NexusValidationException e) {
-                                    System.out.println("Criação de usuário inválida!");
+                                    System.err.println("[ERRO] " + e.getMessage());
                                 }
                             }
                             
@@ -69,8 +69,11 @@ public class LogProcessor {
                                 String username = p[2];
                                 Integer taskIdInt = Integer.parseInt(taskId);
                                 Task tarefa_id = workspace.getTask_by_ID(taskIdInt, workspace.getTasks());
-                                workspace.setTaskUser(tarefa_id, username, users);
-
+                                try{
+                                    workspace.setTaskUser(tarefa_id, username, users);
+                                } catch(NexusValidationException e) {
+                                    System.err.println("[ERRO] " + e.getMessage());
+                                }
 
                                 System.out.println("Tarefa " + tarefa_id.getTitle() +  " atribuida ao user " + username);
                             }
@@ -79,12 +82,10 @@ public class LogProcessor {
                                 String newStatus = p[2];
                                 Integer taskIdInt = Integer.parseInt(taskId);
                                 Task tarefa_id = workspace.getTask_by_ID(taskIdInt, workspace.getTasks());
-                                try{
-                                    workspace.change_status(tarefa_id, newStatus);
-                                    System.out.println("Tarefa " + tarefa_id.getTitle() + " movido para " + newStatus);
-                                } catch(NexusValidationException e){
-
-                                }
+                                workspace.change_status(tarefa_id, newStatus);
+                                System.out.println("Tarefa " + tarefa_id.getTitle() + " movido para " + newStatus);
+                                
+                                
                                 
 
                             }
