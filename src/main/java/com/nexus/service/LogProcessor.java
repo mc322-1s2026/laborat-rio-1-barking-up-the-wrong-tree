@@ -49,11 +49,11 @@ public class LogProcessor {
                                 LocalDate deadlineDate = LocalDate.parse(deadline);
                                 Integer effortInt = Integer.parseInt(effort);
                                 Task nova_task = new Task(taskName, deadlineDate, effortInt);
-                                workspace.addTask(nova_task);
                                 //TODO: bug de tarefa nao entrar em projeto e ainda existir
                                 Integer index = workspace.Project_existe(projectName);
                                 if(index != -1){
                                     workspace.AddTaskProject(nova_task, index);
+                                    workspace.addTask(nova_task);
                                 }
                                 else{
                                     throw new NexusValidationException("Projeto nao existente");
