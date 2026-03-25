@@ -23,7 +23,6 @@ public class Workspace {
 
     public void addTask(Task task) {
 
-        task.incrementTotalTasksCreated();
         tasks.add(task);
     }
 
