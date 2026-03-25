@@ -43,8 +43,12 @@ public class Workspace {
 
     }
 
+    /*
+    *Um método que retorna os 3 usuários que possuem o maior número de tarefas no status DONE 
+    * @return: List<User> de tamanho 3 com os três usuários com as maiores notas
+    */
     public List<User> getTopPerformers(){
-        /*Um método que retorna os 3 usuários que possuem o maior número de tarefas no status DONE */
+       
         List<User> allUsers = Main.getUsers(); 
         
         List<User> topThree = allUsers.stream()
@@ -56,8 +60,12 @@ public class Workspace {
 
     }
 
+    /*
+    * Listar todos os usuários cuja carga de trabalho atual (IN_PROGRESS) ultrapassa 10 tarefas
+    * @return: List<User> overloaded
+    */
     public List<User> getOverloaded(){
-        /*Listar todos os usuários cuja carga de trabalho atual (IN_PROGRESS) ultrapassa 10 tarefas. */
+    
         List<User> allUsers = Main.getUsers(); 
         
         List<User> overloaded = allUsers.stream()
@@ -68,8 +76,12 @@ public class Workspace {
 
     }
 
+    /*
+    *Para um dado projeto, calcular o percentual de conclusão (Tarefas DONE / Total de Tarefas)
+    * @return: string
+    */
     public String getProjectHealth(){
-        /*Para um dado projeto, calcular o percentual de conclusão (Tarefas DONE / Total de Tarefas) */
+        
         
         long tasksDONE = getTasks().stream()
         .filter(task -> task.getStatus()==TaskStatus.DONE)
@@ -86,6 +98,7 @@ public class Workspace {
         return projectHealth;
     }
 
+    
     public TaskStatus getBottleneck(){
         /*Identificar qual o status que possui o maior número de tarefas no sistema (exceto DONE) */
 
